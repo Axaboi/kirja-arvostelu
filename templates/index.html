@@ -2,13 +2,22 @@
 <html>
 
 <head>
-  <title>Etusivu</title>
+  <title>Kirja-arvostelu</title>
 </head>
 
 <body>
-  <h1>Etusivu</h1>
+  <h1>Kirja-arvostelu</h1>
+
+  {% if session.username %}
   <p>
-    <b>Tervetuloa</b> <i>sovellukseen</i>!
+    Olet kirjautunut nimellä {{ session.username }}
+  </p>
+  {% endif %}
+
+  <p>
+    <a href="/login ">Kirjaudu sisään</a>
+    <a href="/register">Luo tunnus</a>
+    <a href="/logout">Kirjaudu ulos</a>
   </p>
 </body>
 
