@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Uusi kirja-arvostelu</title>
+</head>
+
+<body>
+  <h1>Uusi kirja-arvostelu</h1>
+  <form action="/create_item" method="post">
+    <p>
+      Kirjan nimi: <br />
+      <input type="text" name="title" />
+    </p>
+    <p>
+      Sanallinen arvostelu: <br />
+      <textarea type="description" rows="30" cols="60"></textarea>
+    </p>
+    <p>
+      Numeroarvio 1-10: <br />
+      <input type="text" name="book_grade" size="8" />
+    </p>
+    <input type="submit" value="Luo kirja-arvostelu" />
+  </form>
+</body>
+
+</html>
