@@ -5,7 +5,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE books(
-    if INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     title TEXT,
     description TEXT,
     book_grade INTEGER,

@@ -16,15 +16,16 @@ def index():
 def new_book():
     return render_template("new_book.html")
 
-@app.route("/create_book", methods="[POST]")
+@app.route("/create_book", methods=["POST"])
 def create_book():
     title = request.form["title"]
     description = request.form["description"]
     book_grade = request.form["book_grade"]
     user_id = session["user_id"]
-
+    
     sql = """INSERT INTO books (title, description, book_grade, user_id)
              VALUES (?, ?, ?, ?)"""
+    
     db.execute(sql, [title, description, book_grade, user_id])
 
     return redirect("/")
@@ -65,6 +66,7 @@ def login():
         password_hash = result["password_hash"]
     
     if check_password_hash(password_hash, password):
+        session["user_id"] = user_id
         session["username"] = username
         return redirect("/")
     else:
