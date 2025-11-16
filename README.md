@@ -8,3 +8,24 @@
 - Sovellus sisältää käyttäjäsivut, josta näkyy jokaisen käyttäjän tilastot sekä käyttäjän lisäämät kirja-arviot.
 - Käyttäjän on mahdollista valita yksi tai useampi luokittelu arvostelemalleen kirjalle (julkaisuvuosi, genre, sivumäärä, tekijä jne.).
 - Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-10 (1 = ei kannata lukea, 10 = kannattaa ehdottomasti lukea). Numeroarvion pystyy antamaan omiin sekä muiden kirja-arvosteluihin.
+
+## Sovelluksen käyttö
+
+- Sovelluksessa pystyy tällä hetkellä luomaan, muokkaamaan sekä poistamaan kirja-arvosteluja.
+- Sovelluksessa pystyy tällä hetkellä myös hakemaan kirja-arvosteluja.
+
+## Sovelluksen asennus
+
+Asenna `flask`-kirjasto:
+
+```
+$ pip install flask
+```
+
+Luo tietokannan taulut ja lisää alkutiedot:
+
+```
+$ sqlite3 database.db < schema.sql
+```
+
+Sovellus käynnistetään komentorivillä komennolla `flask run`
