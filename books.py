@@ -28,3 +28,8 @@ def update_book(book_id, title, description, book_grade):
                               book_grade = ?
                           WHERE id = ?"""
     db.execute(sql, [title, description, book_grade, book_id])
+
+
+def remove_book(book_id):
+    sql = """DELETE FROM books WHERE id = ?"""
+    db.execute(sql, [book_id])
