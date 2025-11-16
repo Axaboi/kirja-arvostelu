@@ -6,7 +6,12 @@
 </head>
 
 <body>
-    <h1>{{ book.title }}</h1>
+  <h1>{{ book.title }}</h1>
+  {% if book.user_id == session.user_id %}
+  <p>
+    <a href="/edit_book/{{ book.id }}">Muokkaa</a>
+  </p>
+  {% endif %}
     <p>
         {{ book.description }}
     </p>

@@ -11,11 +11,20 @@ def get_books():
     return db.query(sql)
 
 def get_book(book_id):
-    sql = """SELECT books.title,
+    sql = """SELECT books.id,
+                    books.title,
                     books.description,
                     books.book_grade,
+                    users.id user_id,
                     users.username
              FROM books, users
              WHERE books.user_id = users.id AND
                    books.id = ?"""
     return db.query(sql, [book_id])[0]
+
+def update_book(book_id, title, description, book_grade):
+    sql = """UPDATE books SET title = ?,
+                              description = ?,
+                              book_grade = ?
+                          WHERE id = ?"""
+    db.execute(sql, [title, description, book_grade, book_id])
