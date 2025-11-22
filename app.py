@@ -1,6 +1,6 @@
 import sqlite3
 from flask import Flask
-from flask import render_template, redirect, request, session
+from flask import abort, render_template, redirect, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
@@ -47,11 +47,17 @@ def create_book():
 @app.route("/edit_book/<int:book_id>")
 def edit_book(book_id):
     book = books.get_book(book_id)
+    if book["user_id"] != session["user_id"]:
+        abort(403)
     return render_template("edit_book.html", book=book)
 
 @app.route("/update_book", methods=["POST"])
 def update_book():
     book_id = request.form["book_id"]
+    book = books.get_book(book_id)
+    if book["user_id"] != session["user_id"]:
+        abort(403)
+
     title = request.form["title"]
     description = request.form["description"]
     book_grade = request.form["book_grade"]
@@ -62,8 +68,11 @@ def update_book():
 
 @app.route("/remove_book/<int:book_id>", methods = ["GET", "POST"])
 def remove_book(book_id):
+    book = books.get_book(book_id)
+    if book["user_id"] != session["user_id"]:
+        abort(403)
+
     if request.method == "GET":
-        book = books.get_book(book_id)
         return render_template("remove_book.html", book=book)
     
     if request.method == "POST":
