@@ -5,11 +5,14 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
 import books
-forbidden = abort(403)
-not_found = abort(404)
+
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+
+def require_login():
+    if "user_id" not in session:
+        abort(403)
 
 @app.route("/")
 def index():
@@ -30,15 +33,18 @@ def find_book():
 def show_book(book_id):
     book = books.get_book(book_id)
     if not book:
-        not_found
+        abort(404)
     return render_template("show_book.html", book=book)
 
 @app.route("/new_book")
 def new_book():
+    require_login()
     return render_template("new_book.html")
 
 @app.route("/create_book", methods=["POST"])
 def create_book():
+    require_login()
+
     title = request.form["title"]
     description = request.form["description"]
     book_grade = request.form["book_grade"]
@@ -50,21 +56,23 @@ def create_book():
 
 @app.route("/edit_book/<int:book_id>")
 def edit_book(book_id):
+    require_login()
     book = books.get_book(book_id)
     if not book:
-        not_found
+        abort(404)
     if book["user_id"] != session["user_id"]:
-        forbidden
+        abort(403)
     return render_template("edit_book.html", book=book)
 
 @app.route("/update_book", methods=["POST"])
 def update_book():
+    require_login()
     book_id = request.form["book_id"]
     book = books.get_book(book_id)
     if not book:
-        not_found
+        abort(404)
     if book["user_id"] != session["user_id"]:
-        forbidden
+        abort(403)
 
     title = request.form["title"]
     description = request.form["description"]
@@ -76,11 +84,12 @@ def update_book():
 
 @app.route("/remove_book/<int:book_id>", methods = ["GET", "POST"])
 def remove_book(book_id):
+    require_login()
     book = books.get_book(book_id)
     if not book:
-        not_found
+        abort(404)
     if book["user_id"] != session["user_id"]:
-        forbidden
+        abort(403)
 
     if request.method == "GET":
         return render_template("remove_book.html", book=book)
@@ -136,6 +145,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["user_id"]
-    del session["username"]
+    if "user_id" in session:
+        del session["user_id"]
+        del session["username"]
     return redirect("/")
