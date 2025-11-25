@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask
 from flask import abort, render_template, redirect, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
+import re
 import config
 import db
 import books
@@ -46,8 +47,14 @@ def create_book():
     require_login()
 
     title = request.form["title"]
+    if not title or len(title) > 70:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     book_grade = request.form["book_grade"]
+    if not re.search("^[1-5]", book_grade):
+        abort(403)
     user_id = session["user_id"]
     
     books.add_book(title, description, book_grade, user_id)
