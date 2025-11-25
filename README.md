@@ -7,7 +7,7 @@
 - Käyttäjä pystyy etsimään omia sekä muiden käyttäjien kirja-arvosteluja hakemalla kirjan nimeä.
 - Sovellus sisältää käyttäjäsivut, josta näkyy jokaisen käyttäjän tilastot sekä käyttäjän lisäämät kirja-arviot.
 - Käyttäjän on mahdollista valita yksi tai useampi luokittelu arvostelemalleen kirjalle (julkaisuvuosi, genre, sivumäärä, tekijä jne.).
-- Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-10 (1 = ei kannata lukea, 10 = kannattaa ehdottomasti lukea). Numeroarvion pystyy antamaan omiin sekä muiden kirja-arvosteluihin.
+- Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-5 (1 = ei kannata lukea, 5 = kannattaa ehdottomasti lukea). Numeroarvion pystyy antamaan omiin sekä muiden kirja-arvosteluihin.
 
 ## Sovelluksen käyttö
 
