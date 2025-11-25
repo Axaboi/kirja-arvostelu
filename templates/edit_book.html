@@ -10,15 +10,15 @@
   <form action="/update_book" method="post">
     <p>
       Kirjan nimi: <br />
-      <input type="text" name="title" value="{{ book.title }}"/>
+      <input type="text" name="title" value="{{ book.title }}" maxlength="70" required/>
     </p>
     <p>
       Sanallinen arvostelu: <br />
-      <textarea name="description" rows="30" cols="60">{{ book.description }}</textarea>
+      <textarea name="description" rows="15" cols="25" maxlength="1000" required>{{ book.description }}</textarea>
     </p>
     <p>
-      Numeroarvio 1-10: <br />
-      <input type="text" name="book_grade" size="8" value="{{ book.book_grade }}"/>
+      Numeroarvio 1-5: <br />
+      <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required/>
     </p>
     <input type="hidden" name="book_id" value="{{ book.id }}" />
     <input type="submit" value="Muokkaa kirja-arvostelua" />
