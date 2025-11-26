@@ -20,7 +20,7 @@
         Arvosana kirjalle: {{book.book_grade}}
     </p>
     <p>
-        Arvostelun laatija: {{ book.username }}
+        Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
     </p>
     <p>
         <a href="/">Takaisin</a>
