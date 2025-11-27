@@ -59,6 +59,9 @@ def create_book():
     title = request.form["title"]
     if not title or len(title) > 70:
         abort(403)
+    author = request.form["author"]
+    if not author or len(author) > 70:
+        abort(403)
     description = request.form["description"]
     if not description or len(description) > 1000:
         abort(403)
@@ -66,8 +69,19 @@ def create_book():
     if not re.search("^[1-5]", book_grade):
         abort(403)
     user_id = session["user_id"]
+
+    classes = []
+    age = request.form["age"]
+    if age:
+        classes.append(("Ikä", age))
+    genre = request.form["genre"]
+    if genre:
+        classes.append(("Genre", genre))
+    page_count = request.form["page_count"]
+    if page_count:
+        classes.append(("Sivumäärä", page_count))
     
-    books.add_book(title, description, book_grade, user_id)
+    books.add_book(title, description, book_grade, user_id, author, classes)
 
     return redirect("/")
 
