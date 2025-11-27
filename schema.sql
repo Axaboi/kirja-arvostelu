@@ -4,10 +4,19 @@ CREATE TABLE users (
     password_hash TEXT
 );
 
-CREATE TABLE books(
+CREATE TABLE books (
     id INTEGER PRIMARY KEY,
     title TEXT,
     description TEXT,
     book_grade INTEGER,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users,
+    author TEXT
 );
+
+CREATE TABLE book_classes (
+    id INTEGER PRIMARY KEY,
+    book_id INTEGER REFERENCES books,
+    title TEXT,
+    value TEXT
+);
+
