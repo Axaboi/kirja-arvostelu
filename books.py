@@ -1,5 +1,18 @@
 import db
 
+def get_all_classes():
+    sql = "SELECT title, value FROM classes ORDER BY id"
+    result = db.query(sql)
+
+    classes = {}
+    for title, value in result:
+        classes[title] = []
+    for title, value in result:
+        classes[title].append(value)
+
+    return classes
+
+
 def add_book(title, description, book_grade, user_id, author, classes):
     sql = """INSERT INTO books (title, description, book_grade, user_id, author)
              VALUES (?, ?, ?, ?, ?)"""
@@ -16,7 +29,7 @@ def get_classes(book_id):
     return db.query(sql, [book_id])
 
 def get_books():
-    sql = """SELECT id, title FROM books ORDER BY id DESC"""
+    sql = "SELECT id, title FROM books ORDER BY id DESC"
     return db.query(sql)
 
 def get_book(book_id):
@@ -43,7 +56,7 @@ def update_book(book_id, title, description, book_grade, author):
 
 
 def remove_book(book_id):
-    sql = """DELETE FROM books WHERE id = ?"""
+    sql = "DELETE FROM books WHERE id = ?"
     db.execute(sql, [book_id])
 
 def find_book(query):

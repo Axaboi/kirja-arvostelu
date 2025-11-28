@@ -24,33 +24,17 @@
       Numeroarvio 1-5: <br />
       <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
     </p>
+    {% for class in classes %}
     <p>
-      Ikä: <br />
-      <select name="age">
+      {{ class }}: <br />
+      <select name="classes">
         <option value="">(valitse)</option>
-        <option value="uusi">uusi (2000-luku)</option>
-        <option value="vanha">vanha (ennen 2000-lukua)</option>
+      {% for option in classes[class] %}
+        <option value="{{ class }}:{{ option }}">{{ option }}</option>
+      {% endfor %}
       </select>
     </p>
-    <p>
-      Genre: <br />
-      <select name="genre">
-        <option value="">(valitse)</option>
-        <option value="proosa">proosa</option>
-        <option value="runous">runous</option>
-        <option value="draama">draama</option>
-        <option value="tietokirjallisuus">tietokirjallisuus</option>
-        <option value="muu">muu</option>
-      </select>
-    </p>
-    <p>
-      Sivumäärä: <br />
-      <select name="page_count">
-        <option value="1-499">1-499</option>
-        <option value="500-999">500-999</option>
-        <option value="yli_1000">yli 1000</option>
-      </select>
-    </p>
+    {% endfor %}
     <input type="submit" value="Luo kirja-arvostelu" />
   </form>
 </body>
