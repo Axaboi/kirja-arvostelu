@@ -14,6 +14,9 @@
   </p>
   {% endif %}
     <p>
+        Kirjailija: {{book.author}}
+    </p>
+    <p>
         {{ book.description }}
     </p>
     <p>
@@ -22,6 +25,16 @@
     <p>
         Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
     </p>
+    {% if classes %}
+    <p>
+      Luokat:
+      <ul>
+        {% for class in classes %}
+        <li>{{ class.title }}: {{ class.value }}</li>
+        {% endfor %}
+      </ul>
+    </p>
+    {% endif %}
     <p>
         <a href="/">Takaisin</a>
     </p>
