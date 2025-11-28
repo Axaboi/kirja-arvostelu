@@ -1,10 +1,19 @@
 import db
 
-def add_book(title, description, book_grade, user_id):
-    sql = """INSERT INTO books (title, description, book_grade, user_id)
-             VALUES (?, ?, ?, ?)"""
-    db.execute(sql, [title, description, book_grade, user_id])
+def add_book(title, description, book_grade, user_id, author, classes):
+    sql = """INSERT INTO books (title, description, book_grade, user_id, author)
+             VALUES (?, ?, ?, ?, ?)"""
+    db.execute(sql, [title, description, book_grade, user_id, author])
 
+    book_id = db.last_insert_id()
+
+    sql = "INSERT INTO book_classes (book_id, title, value) VALUES (?, ?, ?)"
+    for title, value in classes:
+        db.execute(sql, [book_id, title, value])
+
+def get_classes(book_id):
+    sql = "SELECT title, value FROM book_classes WHERE book_id = ?"
+    return db.query(sql, [book_id])
 
 def get_books():
     sql = """SELECT id, title FROM books ORDER BY id DESC"""
@@ -15,6 +24,7 @@ def get_book(book_id):
                     books.title,
                     books.description,
                     books.book_grade,
+                    books.author,
                     users.id user_id,
                     users.username
              FROM books, users
@@ -23,12 +33,13 @@ def get_book(book_id):
     result = db.query(sql, [book_id])
     return result[0] if result else None
 
-def update_book(book_id, title, description, book_grade):
+def update_book(book_id, title, description, book_grade, author):
     sql = """UPDATE books SET title = ?,
                               description = ?,
-                              book_grade = ?
+                              book_grade = ?,
+                              author = ?
                           WHERE id = ?"""
-    db.execute(sql, [title, description, book_grade, book_id])
+    db.execute(sql, [title, description, book_grade, author, book_id])
 
 
 def remove_book(book_id):
