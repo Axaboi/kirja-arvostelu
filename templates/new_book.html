@@ -13,12 +13,43 @@
       <input type="text" name="title" maxlength="70" required/>
     </p>
     <p>
+      Kirjailija: <br />
+      <input type="text" name="author" maxlength="70" required>
+    </p>
+    <p>
       Sanallinen arvostelu: <br />
       <textarea name="description" rows="15" cols="25" maxlength="1000" required></textarea>
     </p>
     <p>
       Numeroarvio 1-5: <br />
       <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
+    </p>
+    <p>
+      Ikä: <br />
+      <select name="age">
+        <option value="">(valitse)</option>
+        <option value="uusi">uusi (2000-luku)</option>
+        <option value="vanha">vanha (ennen 2000-lukua)</option>
+      </select>
+    </p>
+    <p>
+      Genre: <br />
+      <select name="genre">
+        <option value="">(valitse)</option>
+        <option value="proosa">proosa</option>
+        <option value="runous">runous</option>
+        <option value="draama">draama</option>
+        <option value="tietokirjallisuus">tietokirjallisuus</option>
+        <option value="muu">muu</option>
+      </select>
+    </p>
+    <p>
+      Sivumäärä: <br />
+      <select name="page_count">
+        <option value="1-499">1-499</option>
+        <option value="500-999">500-999</option>
+        <option value="yli_1000">yli 1000</option>
+      </select>
     </p>
     <input type="submit" value="Luo kirja-arvostelu" />
   </form>
