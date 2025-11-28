@@ -25,6 +25,21 @@
       <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required/>
     </p>
     <input type="hidden" name="book_id" value="{{ book.id }}" />
+    {% for class in all_classes %}
+    <p>
+      {{ class }}: <br />
+      <select name="classes">
+        <option value="">(valitse)</option>
+      {% for option in all_classes[class] %}
+        {% if classes[class] == option %}
+        <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+        {% else %}
+        <option value="{{ class }}:{{ option }}">{{ option }}</option>
+        {% endif %}
+      {% endfor %}
+      </select>
+    </p>
+    {% endfor %}
     <input type="submit" value="Muokkaa kirja-arvostelua" />
   </form>
 </body>

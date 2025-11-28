@@ -90,7 +90,16 @@ def edit_book(book_id):
         abort(404)
     if book["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_book.html", book=book)
+
+    all_classes = books.get_all_classes()
+    classes = {}
+    for single_class in all_classes:
+        classes[single_class] = ""
+    for entry in books.get_classes(book_id):
+        classes[entry["title"]] = entry["value"]
+
+    return render_template("edit_book.html", book=book, all_classes=all_classes,
+    classes=classes)
 
 @app.route("/update_book", methods=["POST"])
 def update_book():
@@ -105,12 +114,21 @@ def update_book():
     title = request.form["title"]
     if not title or len(title) > 70:
         abort(403)
+    author = request.form["author"]
+    if not author or len(author) > 70:
+        abort(403)
     description = request.form["description"]
     if not description or len(description) > 1000:
         abort(403)
     book_grade = request.form["book_grade"]
-    
-    books.update_book(book_id, title, description, book_grade)
+
+    classes = []
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
+
+    books.update_book(book_id, title, author, description, book_grade, classes)
 
     return redirect("/book/" + str(book_id))
 
