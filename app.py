@@ -45,7 +45,8 @@ def show_book(book_id):
     book = books.get_book(book_id)
     if not book:
         abort(404)
-    return render_template("show_book.html", book=book)
+    classes = books.get_classes(book_id)
+    return render_template("show_book.html", book=book, classes=classes)
 
 @app.route("/new_book")
 def new_book():
