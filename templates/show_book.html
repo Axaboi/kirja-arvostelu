@@ -41,6 +41,7 @@
       <li>Arvosana ja kommentti: {{ comment.book_grade }} {{ comment.description }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
       {% endfor %}
     </ul>
+    {% if session.user_id == book.user_id%}
     <h3>Luo kommentti</h3>
     Kommentti (sanallinen arvio sekä arvosana): <br />
     <form action="/comment" method="post">
@@ -49,6 +50,7 @@
       <input type="hidden" name="book_id" value="{{ book.id }}">
       <input type="submit" value="Kommentoi"/>
     </form>
+    {% endif %}
     <p>
         <a href="/">Takaisin</a>
     </p>
