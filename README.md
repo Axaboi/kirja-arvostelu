@@ -7,7 +7,8 @@
 - Käyttäjä pystyy etsimään omia sekä muiden käyttäjien kirja-arvosteluja hakemalla kirjan nimeä.
 - Sovellus sisältää käyttäjäsivut, josta näkyy jokaisen käyttäjän tilastot sekä käyttäjän lisäämät kirja-arviot.
 - Käyttäjän on mahdollista valita yksi tai useampi luokittelu arvostelemalleen kirjalle (uusi vai vanha, genre, sivumäärä).
-- Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-5 (1 = ei kannata lukea, 5 = kannattaa ehdottomasti lukea). Numeroarvion pystyy antamaan omiin sekä muiden kirja-arvosteluihin.
+- Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-5 (1 = ei kannata lukea, 5 = kannattaa ehdottomasti lukea).
+- Käyttäjät pystyvät antamaan kommentteja kirja-arvosteluihin numeroarvion (asteikko 1-5) sekä sanallisen arvion muodossa.
 
 ## Sovelluksen käyttö
 
@@ -26,6 +27,7 @@ Luo tietokannan taulut ja lisää alkutiedot:
 
 ```
 $ sqlite3 database.db < schema.sql
+$ sqlite3 database.db < init.sql
 ```
 
 Sovellus käynnistetään komentorivillä komennolla `flask run`
