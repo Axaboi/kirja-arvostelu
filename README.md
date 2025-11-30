@@ -14,7 +14,7 @@
 
 - Sovelluksessa pystyy tällä hetkellä luomaan, muokkaamaan sekä poistamaan kirja-arvosteluja.
 - Sovelluksessa pystyy tällä hetkellä hakemaan kirja-arvosteluja.
-- Sovelluksessa pystyy kommentoimaan kirja-arvosteluja.
+- Sovelluksessa pystyy tällä hetkellä kommentoimaan kirja-arvosteluja.
 
 ## Sovelluksen asennus
 
