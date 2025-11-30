@@ -8,7 +8,7 @@ def get_user(user_id):
 
 def get_books(user_id):
     sql = "SELECT id, title FROM books WHERE user_id = ? ORDER BY id DESC"
-    result = db.query(sql, [user_id])
+    return db.query(sql, [user_id])
 
 def create_user(username, password):
     password_hash = generate_password_hash(password)
