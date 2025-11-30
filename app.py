@@ -8,7 +8,6 @@ import db
 import books
 import users
 
-
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
@@ -29,7 +28,6 @@ def show_user(user_id):
     books = users.get_books(user_id)
     return render_template("show_user.html", user=user, books=books)
 
-
 @app.route("/find_book")
 def find_book():
     query = request.args.get("query")
@@ -46,7 +44,8 @@ def show_book(book_id):
     if not book:
         abort(404)
     classes = books.get_classes(book_id)
-    return render_template("show_book.html", book=book, classes=classes)
+    comments = books.get_comments(book_id)
+    return render_template("show_book.html", book=book, classes=classes, comments=comments)
 
 @app.route("/new_book")
 def new_book():
@@ -88,6 +87,25 @@ def create_book():
 
     return redirect("/")
 
+@app.route("/comment", methods=["POST"])
+def comment():
+    require_login()
+
+    book_grade = request.form["book_grade"]
+    if not re.search("^[1-5]", book_grade):
+        abort(403)
+    description = request.form["description"]
+    if not description or len(description) > 30:
+        abort(403)
+    book_id = request.form["book_id"]
+    if not book_id:
+        abort(403)
+    user_id = session["user_id"]
+
+    books.add_comment(book_id, user_id, book_grade, description)
+
+    return redirect("/book/" + str(book_id))
+
 @app.route("/edit_book/<int:book_id>")
 def edit_book(book_id):
     require_login()
@@ -127,6 +145,8 @@ def update_book():
     if not description or len(description) > 1000:
         abort(403)
     book_grade = request.form["book_grade"]
+    if not re.search("^[1-5]", book_grade):
+        abort(403)
 
     all_classes = books.get_all_classes()
 

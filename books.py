@@ -12,7 +12,6 @@ def get_all_classes():
 
     return classes
 
-
 def add_book(title, description, book_grade, user_id, author, classes):
     sql = """INSERT INTO books (title, description, book_grade, user_id, author)
              VALUES (?, ?, ?, ?, ?)"""
@@ -61,7 +60,6 @@ def update_book(book_id, title, description, book_grade, author, classes):
     for title, value in classes:
         db.execute(sql, [book_id, title, value])
 
-
 def remove_book(book_id):
     sql = "DELETE FROM book_classes WHERE book_id = ?"
     db.execute(sql, [book_id])
@@ -74,3 +72,14 @@ def find_book(query):
              ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])
+
+def add_comment(book_id, user_id, book_grade, description):
+    sql = """INSERT INTO comments (book_id, user_id, book_grade, description)
+             VALUES (?, ?, ?, ?)"""
+    db.execute(sql, [book_id, user_id, book_grade, description])
+
+def get_comments(book_id):
+    sql = """SELECT comments.book_grade, users.id user_id, users.username,
+             comments.description FROM comments, users WHERE comments.book_id = ?
+             AND comments.user_id = users.id ORDER BY comments.id DESC"""
+    return db.query(sql, [book_id])
