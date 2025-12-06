@@ -10,24 +10,19 @@
 
   {% if session.username %}
   <p>
-    Olet kirjautunut nimellä {{ session.username }} ja id-numerolla {{ session.user_id }}
-  </p>
-  <p>
-    <a href="/logout">Kirjaudu ulos</a>
-  </p>
-
-  <p>
-    <a href="/new_book">Uusi kirja-arvostelu</a>
-  </p>
-  {% else %}
-  <p>
-    <a href="/login">Kirjaudu sisään</a>
-    <a href="/register">Luo tunnus</a>
+    Olet kirjautunut nimellä {{ session.username }}
   </p>
   {% endif %}
 
   <p>
-    <a href="/find_book">Hae kirja-arvostelua</a>
+    <a href="/find_book">Hae kirja-arvostelua</a> |
+  {% if session.user_id %}
+    <a href="/new_book">Uusi kirja-arvostelu</a> |
+    <a href="/logout">Kirjaudu ulos</a>
+  {% else %}
+    <a href="/login">Kirjaudu sisään</a> |
+    <a href="/register">Luo tunnus</a>
+  {% endif %}
   </p>
 
   <h2>Kirja-arvostelut</h2>
