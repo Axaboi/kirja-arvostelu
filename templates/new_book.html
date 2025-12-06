@@ -1,42 +1,37 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Uusi kirja-arvostelu</title>
-</head>
+{% block title %}Uusi kirja-arvostelu{% endblock %}
 
-<body>
-  <h1>Uusi kirja-arvostelu</h1>
-  <form action="/create_book" method="post">
-    <p>
-      Kirjan nimi: <br />
-      <input type="text" name="title" maxlength="70" required/>
-    </p>
-    <p>
-      Kirjailija: <br />
-      <input type="text" name="author" maxlength="70" required>
-    </p>
-    <p>
-      Sanallinen arvostelu: <br />
-      <textarea name="description" rows="15" cols="25" maxlength="1000" required></textarea>
-    </p>
-    <p>
-      Numeroarvio 1-5: <br />
-      <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
-    </p>
-    {% for class in classes %}
-    <p>
-      {{ class }}: <br />
-      <select name="classes">
-        <option value="">(valitse)</option>
-      {% for option in classes[class] %}
-        <option value="{{ class }}:{{ option }}">{{ option }}</option>
-      {% endfor %}
-      </select>
-    </p>
+{% block content %}
+<h1>Uusi kirja-arvostelu</h1>
+<form action="/create_book" method="post">
+  <p>
+    Kirjan nimi: <br />
+    <input type="text" name="title" maxlength="70" required/>
+  </p>
+  <p>
+    Kirjailija: <br />
+    <input type="text" name="author" maxlength="70" required>
+  </p>
+  <p>
+    Sanallinen arvostelu: <br />
+    <textarea name="description" rows="15" cols="25" maxlength="1000" required></textarea>
+  </p>
+  <p>
+    Numeroarvio 1-5: <br />
+    <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
+  </p>
+  {% for class in classes %}
+  <p>
+    {{ class }}: <br />
+    <select name="classes">
+      <option value="">(valitse)</option>
+    {% for option in classes[class] %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
     {% endfor %}
-    <input type="submit" value="Luo kirja-arvostelu" />
-  </form>
-</body>
-
-</html>
+    </select>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Luo kirja-arvostelu" />
+</form>
+{% endblock %}

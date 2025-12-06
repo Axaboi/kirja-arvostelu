@@ -1,50 +1,42 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Kirja-arvostelun muokkaus</title>
-</head>
+{% block title %}Muokkaa kirja-arvostelua{% endblock %}
 
-<body>
-  <h1>Muokkaa kirja-arvostelua</h1>
-  <form action="/update_book" method="post">
-    <p>
-      Kirjan nimi: <br />
-      <input type="text" name="title" value="{{ book.title }}" maxlength="70" required/>
-    </p>
-    <p>
-      Kirjailija: <br />
-      <input type="text" name="author" value="{{ book.author }}" maxlength="70" required>
-    </p>
-    <p>
-      Sanallinen arvostelu: <br />
-      <textarea name="description" rows="15" cols="25" maxlength="1000" required>{{ book.description }}</textarea>
-    </p>
-    <p>
-      Numeroarvio 1-5: <br />
-      <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required/>
-    </p>
-    <input type="hidden" name="book_id" value="{{ book.id }}" />
-    {% for class in all_classes %}
-    <p>
-      {{ class }}: <br />
-      <select name="classes">
-        <option value="">(valitse)</option>
-      {% for option in all_classes[class] %}
-        {% if classes[class] == option %}
-        <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
-        {% else %}
-        <option value="{{ class }}:{{ option }}">{{ option }}</option>
-        {% endif %}
-      {% endfor %}
-      </select>
-    </p>
-    {% endfor %}
-    <input type="submit" value="Muokkaa kirja-arvostelua" />
-  </form>
+{% block content %}
+<h1>Muokkaa kirja-arvostelua</h1>
+<form action="/update_book" method="post">
   <p>
-    <a href="/">Takaisin</a>
+    Kirjan nimi: <br />
+    <input type="text" name="title" value="{{ book.title }}" maxlength="70" required/>
   </p>
-</body>
-
-</html>
+  <p>
+    Kirjailija: <br />
+    <input type="text" name="author" value="{{ book.author }}" maxlength="70" required>
+  </p>
+  <p>
+    Sanallinen arvostelu: <br />
+    <textarea name="description" rows="15" cols="25" maxlength="1000" required>{{ book.description }}</textarea>
+  </p>
+  <p>
+    Numeroarvio 1-5: <br />
+    <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required/>
+  </p>
+  <input type="hidden" name="book_id" value="{{ book.id }}" />
+  {% for class in all_classes %}
+  <p>
+    {{ class }}: <br />
+    <select name="classes">
+      <option value="">(valitse)</option>
+    {% for option in all_classes[class] %}
+      {% if classes[class] == option %}
+      <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+      {% else %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
+      {% endif %}
+    {% endfor %}
+    </select>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Muokkaa kirja-arvostelua" />
+</form>
+{% endblock %}

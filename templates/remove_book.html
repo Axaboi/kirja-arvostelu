@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Kirja-arvostelun poistaminen</title>
-</head>
+{% block title %}Poista kirja-arvostelu{% endblock %}
 
-<body>
-  <h1>Poista kirja-arvostelu</h1>
-  <p>Kirja-arvostelu: {{ book.title }}</p>
-  <p>Poistetaanko kirja-arvostelu?</p>
-  <form action="/remove_book/{{ book.id }}" method="post">
-    <input type="submit" name="remove" value="Poista arvostelu">
-    <input type="submit" name="back" value="Takaisin">
-  </form>
-</body>
-
-</html>
+{% block content %}
+<h1>Poista kirja-arvostelu</h1>
+<p>Kirja-arvostelu: {{ book.title }}</p>
+<p>Poistetaanko kirja-arvostelu?</p>
+<form action="/remove_book/{{ book.id }}" method="post">
+  <input type="submit" name="remove" value="Poista arvostelu">
+  <input type="submit" name="back" value="Takaisin">
+</form>
+{% endblock %}
