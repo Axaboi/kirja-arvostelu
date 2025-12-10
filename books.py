@@ -28,7 +28,12 @@ def get_classes(book_id):
     return db.query(sql, [book_id])
 
 def get_books():
-    sql = "SELECT id, title FROM books ORDER BY id DESC"
+    sql = """SELECT books.id, books.title, users.id user_id, users.username,
+             COUNT(comments.id) comment_quantity
+             FROM books JOIN users ON books.user_id = users.id
+                        LEFT JOIN comments ON books.id = comments.book_id
+             GROUP BY books.id
+             ORDER BY books.id DESC"""
     return db.query(sql)
 
 def get_book(book_id):

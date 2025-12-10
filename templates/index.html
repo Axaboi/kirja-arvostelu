@@ -3,11 +3,13 @@
 {% block title %}Kirja-arvostelu{% endblock %}
 
 {% block content %}
-  <h2>Kirja-arvostelut</h2>
+<h2>Kirja-arvostelut</h2>
 
-  <ul>
-    {% for book in books %}
-    <li><a href="/book/{{ book.id }}">{{ book.title }}</a></li>
-    {% endfor %}
-  </ul>
+{% for book in books %}
+<div class="book">
+<a href="/book/{{ book.id }}">{{ book.title }}</a> <br />
+Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a> <br />
+Kommentit kirjalle: {{ book.comment_quantity }}
+</div>
+{% endfor %}
 {% endblock %}

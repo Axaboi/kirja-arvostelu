@@ -10,42 +10,42 @@
   <a href="/remove_book/{{ book.id }}">Poista</a>
 </p>
 {% endif %}
-  <p>
-      Kirjailija: {{book.author}}
-  </p>
-  <p>
-      {{ book.description }}
-  </p>
-  <p>
-      Arvosana kirjalle: {{book.book_grade}}
-  </p>
-  <p>
-      Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
-  </p>
-  {% if classes %}
-  <p>
-    Luokat:
-    <ul>
-      {% for class in classes %}
-      <li>{{ class.title }}: {{ class.value }}</li>
-      {% endfor %}
-    </ul>
-  </p>
-  {% endif %}
-  <h3>Kommentit</h3>
+<p>
+    Kirjailija: {{book.author}}
+</p>
+<p>
+    {{ book.description }}
+</p>
+<p>
+    Arvosana kirjalle: {{book.book_grade}}
+</p>
+<p>
+    Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
+</p>
+{% if classes %}
+<p>
+  Luokat:
   <ul>
-    {% for comment in comments %}
-    <li>Arvosana ja kommentti: {{ comment.book_grade }} {{ comment.description }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
+    {% for class in classes %}
+    <li>{{ class.title }}: {{ class.value }}</li>
     {% endfor %}
   </ul>
-  {% if session.user_id == book.user_id%}
-  <h3>Luo kommentti</h3>
-  Kommentti (sanallinen arvio sekä arvosana): <br />
-  <form action="/comment" method="post">
-    <textarea name="description" rows="10" cols="10" maxlength="30" required></textarea>
-    <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
-    <input type="hidden" name="book_id" value="{{ book.id }}">
-    <input type="submit" value="Kommentoi"/>
-  </form>
-  {% endif %}
+</p>
+{% endif %}
+<h3>Kommentit</h3>
+<ul>
+  {% for comment in comments %}
+  <li>Arvosana ja kommentti: {{ comment.book_grade }} {{ comment.description }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
+  {% endfor %}
+</ul>
+{% if book.user_id != session.user_id %}
+<h3>Luo kommentti</h3>
+Kommentti (sanallinen arvio sekä arvosana): <br />
+<form action="/comment" method="post">
+  <textarea name="description" rows="10" cols="10" maxlength="30" required></textarea>
+  <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
+  <input type="hidden" name="book_id" value="{{ book.id }}">
+  <input type="submit" value="Kommentoi"/>
+</form>
+{% endif %}
 {% endblock %} 
