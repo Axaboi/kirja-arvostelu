@@ -38,7 +38,7 @@
   <li>Arvosana ja kommentti: {{ comment.book_grade }} {{ comment.description }}, <a href="/user/{{ comment.user_id }}">{{ comment.username }}</a></li>
   {% endfor %}
 </ul>
-{% if book.user_id != session.user_id %}
+{% if session.user_id and book.user_id != session.user_id %}
 <h3>Luo kommentti</h3>
 Kommentti (sanallinen arvio sekä arvosana): <br />
 <form action="/comment" method="post">
