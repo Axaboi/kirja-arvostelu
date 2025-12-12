@@ -66,6 +66,8 @@ def update_book(book_id, title, description, book_grade, author, classes):
         db.execute(sql, [book_id, title, value])
 
 def remove_book(book_id):
+    sql = "DELETE FROM comments WHERE book_id = ?"
+    db.execute(sql, [book_id])
     sql = "DELETE FROM book_classes WHERE book_id = ?"
     db.execute(sql, [book_id])
     sql = "DELETE FROM books WHERE id = ?"
