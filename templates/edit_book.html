@@ -4,6 +4,9 @@
 
 {% block content %}
 <h1>Muokkaa kirja-arvostelua</h1>
+<p>
+  Kirja-arvostelu: <a href="/book/{{ book.id }}">{{ book.title }}</a>
+</p>
 <form action="/update_book" method="post">
   <p>
     Kirjan nimi: <br />
@@ -39,4 +42,7 @@
   {% endfor %}
   <input type="submit" value="Muokkaa kirja-arvostelua" />
 </form>
+<p>
+  <a href="/book/{{ book.id }}">Takaisin</a>
+</p>
 {% endblock %}
