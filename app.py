@@ -2,6 +2,7 @@ import sqlite3
 from flask import Flask
 from flask import abort, flash, render_template, redirect, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
+import secrets
 import re
 import config
 import db
@@ -13,6 +14,12 @@ app.secret_key = config.secret_key
 
 def require_login():
     if "user_id" not in session:
+        abort(403)
+
+def check_csrf():
+    if "csrf_token" not in session:
+        abort(403)
+    if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
 
 @app.route("/")
@@ -56,6 +63,7 @@ def new_book():
 @app.route("/create_book", methods=["POST"])
 def create_book():
     require_login()
+    check_csrf()
 
     title = request.form["title"]
     if not title or len(title) > 70:
@@ -90,6 +98,7 @@ def create_book():
 @app.route("/comment", methods=["POST"])
 def comment():
     require_login()
+    check_csrf()
 
     book_grade = request.form["book_grade"]
     if not re.search("^[1-5]", book_grade):
@@ -128,6 +137,8 @@ def edit_book(book_id):
 @app.route("/update_book", methods=["POST"])
 def update_book():
     require_login()
+    check_csrf()
+
     book_id = request.form["book_id"]
     book = books.get_book(book_id)
     if not book:
@@ -178,6 +189,7 @@ def remove_book(book_id):
         return render_template("remove_book.html", book=book)
     
     if request.method == "POST":
+        check_csrf()
         if "remove" in request.form:
             books.remove_book(book_id)
             return redirect("/")
@@ -219,6 +231,7 @@ def login():
     if user_id:
         session["user_id"] = user_id
         session["username"] = username
+        session["csrf_token"] = secrets.token_hex(16)
         return redirect("/")
     else:
         flash("VIRHE: väärä tunnus tai salasana")

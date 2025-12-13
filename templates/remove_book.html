@@ -7,6 +7,7 @@
 <p>Kirja-arvostelu: <a href="/book/{{ book.id }}">{{ book.title }}</a></p>
 <p>Poistetaanko kirja-arvostelu?</p>
 <form action="/remove_book/{{ book.id }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" name="remove" value="Poista arvostelu">
   <input type="submit" name="back" value="Takaisin">
 </form>

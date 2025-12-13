@@ -45,6 +45,7 @@ Kommentti (sanallinen arvio sekä arvosana): <br />
   <textarea name="description" rows="10" cols="10" maxlength="30" required></textarea>
   <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" required/>
   <input type="hidden" name="book_id" value="{{ book.id }}">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Kommentoi"/>
 </form>
 {% endif %}
