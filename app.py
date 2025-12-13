@@ -167,6 +167,7 @@ def update_book():
 @app.route("/remove_book/<int:book_id>", methods = ["GET", "POST"])
 def remove_book(book_id):
     require_login()
+
     book = books.get_book(book_id)
     if not book:
         abort(404)
