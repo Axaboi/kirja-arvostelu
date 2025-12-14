@@ -210,8 +210,14 @@ def register():
 @app.route("/create", methods=["POST"])
 def create():
     username = request.form["username"]
+    if not username or len(username) < 1 or len(username) > 30:
+        abort(403)
     password1 = request.form["password1"]
+    if not password1 or len(password1) < 1 or len(password1) > 40:
+        abort(403)
     password2 = request.form["password2"]
+    if not password2 or len(password2) < 1 or len(password2) > 40:
+        abort(403)
     if password1 != password2:
         flash("VIRHE: salasanat eivät ole samat")
         return redirect("/register")
@@ -232,7 +238,13 @@ def login():
     
     if request.method == "POST":
         username = request.form["username"]
+        if not username or len(username) < 1 or len(username) > 30:
+            flash("VIRHE: väärä tunnus tai salasana")
+            return redirect("/login")
         password = request.form["password"]
+        if not password or len(password) < 1 or len(password) > 40:
+            flash("VIRHE: väärä tunnus tai salasana")
+            return redirect("/login")
 
     user_id = users.check_login(username, password)
     if user_id:
