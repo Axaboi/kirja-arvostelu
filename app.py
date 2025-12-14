@@ -171,7 +171,7 @@ def update_book():
                 abort(403)
             classes.append((class_title, value))
 
-    books.update_book(book_id, title, author, description, book_grade, classes)
+    books.update_book(book_id, title, description, book_grade, author, classes)
 
     return redirect("/book/" + str(book_id))
 
