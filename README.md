@@ -1,6 +1,5 @@
 # Kirja-arvostelu
 
-
 - Käyttäjä pystyy luomaan tunnuksen sekä kirjautumaan sovellukseen.
 - Käyttäjä pystyy lisäämään, muokkaamaan sekä poistamaan tekemiään kirja-arvosteluja, jotka koostuvat kirjan nimestä, kirjailijasta sekä sanallisesta arvostelusta.
 - Käyttäjä pystyy näkemään lisäämänsä kirja-arvostelut. Käyttäjä pystyy näkemään myös muiden lisäämät kirja-arvostelut.
@@ -9,12 +8,6 @@
 - Käyttäjän on mahdollista valita yksi tai useampi luokittelu arvostelemalleen kirjalle (uusi vai vanha, genre, sivumäärä).
 - Käyttäjä pystyy sanallisen arvion lisäksi antamaan kirjasta lukusuosituksen numeroasteikolla 1-5 (1 = ei kannata lukea, 5 = kannattaa ehdottomasti lukea).
 - Käyttäjät pystyvät antamaan kommentteja kirja-arvosteluihin numeroarvion (asteikko 1-5) sekä sanallisen arvion muodossa.
-
-## Sovelluksen käyttö
-
-- Sovelluksessa pystyy tällä hetkellä luomaan, muokkaamaan sekä poistamaan kirja-arvosteluja.
-- Sovelluksessa pystyy tällä hetkellä hakemaan kirja-arvosteluja.
-- Sovelluksessa pystyy tällä hetkellä kommentoimaan kirja-arvosteluja.
 
 ## Sovelluksen asennus
 
