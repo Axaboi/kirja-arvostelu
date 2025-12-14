@@ -1,10 +1,12 @@
-import sqlite3
 from flask import Flask
 from flask import abort, flash, render_template, redirect, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import markupsafe
+
 import secrets
 import re
+import sqlite3
+
 import config
 import db
 import books
