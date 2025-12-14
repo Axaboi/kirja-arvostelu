@@ -9,26 +9,26 @@
 </p>
 <form action="/update_book" method="post">
   <p>
-    Kirjan nimi: <br />
-    <input type="text" name="title" value="{{ book.title }}" maxlength="70" required/>
+    <label for="title">Kirjan nimi</label>: <br />
+    <input type="text" name="title" id="title" value="{{ book.title }}" maxlength="70" required />
   </p>
   <p>
-    Kirjailija: <br />
-    <input type="text" name="author" value="{{ book.author }}" maxlength="70" required>
+    <label for="author">Kirjailija</label>: <br />
+    <input type="text" name="author" id="author" value="{{ book.author }}" maxlength="70" required />
   </p>
   <p>
-    Sanallinen arvostelu: <br />
-    <textarea name="description" rows="15" cols="25" maxlength="1000" required>{{ book.description }}</textarea>
+    <label for="description">Sanallinen arvostelu</label>: <br />
+    <textarea name="description" id="description" rows="15" cols="25" maxlength="1000" required>{{ book.description }}</textarea>
   </p>
   <p>
-    Numeroarvio 1-5: <br />
-    <input type="number" name="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required/>
+    <label for="book_grade">Numeroarvio 1-5</label>: <br />
+    <input type="number" name="book_grade" id="book_grade" min="1" max="5" size="8" pattern="[1-5]" value="{{ book.book_grade }}" required />
   </p>
   <input type="hidden" name="book_id" value="{{ book.id }}" />
   {% for class in all_classes %}
   <p>
-    {{ class }}: <br />
-    <select name="classes">
+    <label for="class{{ class }}">{{ class }}</label> <br />
+    <select name="classes" id="class{{ class }}">
       <option value="">(valitse)</option>
     {% for option in all_classes[class] %}
       {% if classes[class] == option %}
