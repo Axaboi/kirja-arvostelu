@@ -14,10 +14,10 @@
     Kirjailija: {{book.author}}
 </p>
 <p>
-    {{ book.description }}
+  Sanallinen arvostelu: {{ book.description | show_lines }}
 </p>
 <p>
-    Arvosana kirjalle: {{book.book_grade}}
+    Arvosana kirjalle: {{ book.book_grade }}
 </p>
 <p>
     Arvostelun laatija: <a href="/user/{{ book.user_id }}">{{ book.username }}</a>
